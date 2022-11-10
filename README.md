@@ -99,7 +99,7 @@ InstantCity is made possible by using the following packages
 * [GeoPandas](https://geopandas.org/)
 * [Robosat](https://github.com/mapbox/robosat) - 
  mask to feature function is borrowed from robosat
-* [GANmapeer](https://github.com/ualsg/GANmapper) - 
+* [GANmapper](https://github.com/ualsg/GANmapper) - 
 Data processing scripts are borrowed from GANmapper
 
 * [pix2pixHD](https://github.com/NVIDIA/pix2pixHD) - 

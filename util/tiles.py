@@ -85,7 +85,7 @@ def fetch_image(session, url, timeout=10):
         return None
 
 
-def tiles_from_slippy_map(root):
+def tiles_from_slippy_map(root, zoom):
     """Loads files from an on-disk slippy map directory structure.
 
     Args:
@@ -105,7 +105,8 @@ def tiles_from_slippy_map(root):
             return False
 
     for z in os.listdir(root):
-        if not isdigit(z):
+        if z != str(zoom):
+        #if not isdigit(z):
             continue
 
         for x in os.listdir(os.path.join(root, z)):

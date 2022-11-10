@@ -1,69 +1,106 @@
 
+<p align="center">
+  <a href="https://ual.sg/">
+    <img src="images/logo.jpg" alt="Logo">
+  </a>
+  <h3 align="center">InstantCITY: Synthesising morphologically accurate geospatial data for urban form analysis, transfer, and quality control</h3>
+  <a >
+    <img src="images/Pipeline.png" alt="Logo">
+  </a>
+</p>
 
+This is the official repo of InstantCITY, a Geospatial Data Translation model for urban form analysis, transfer, and quality control
 
-Training:
+## Running InstantCITY 
+### 1. Install prerequisites
 
-python test.py --name xxx --netG local --ngf 32 --resize_or_crop none $@
+Use `environment.yml` to create a conda environment for GANmapper
 
+  ```sh
+  conda env create -f environment.yml
+  conda activate IC
+  ```
 
+### 2. Download weights
+The weights files are available on figshare in the Checkpoints folder.
 
-python train.py --name xxx --dataroot ./datasets/Prepped/xxx --no_instance --batchSize 2
+```https://doi.org/10.6084/m9.figshare.15103128.v1```
 
+Place the `Checkpoints` folder in the repo.
+### 3. Prediction
+Predictions can be carried out by running the following sample code. The name of the city depends on the name of each dataset.
 
+ ```sh
+ python test.py --name <model_name> --dataroot <path to input XYZ tile dir with street networks> 
+  ```
 
-python train.py --name Berlin --dataroot ./datasets/Prepped/Berlin --no_instance --batchSize 2
-python train.py --name Chicago --dataroot ./datasets/Prepped/Chicago --no_instance --batchSize 2
-python train.py --name Singapore --dataroot ./datasets/Prepped/Singapore --no_instance --batchSize 2
-python train.py --name Tokyo --dataroot ./datasets/Prepped/Tokyo --no_instance --batchSize 2
-python train.py --name Manhattan --dataroot ./datasets/Prepped/Manhattan --no_instance --batchSize 2
+Testing an area in New York:
+ ```sh
+ python test.py --name NY15 --dataroot ./datasets/Test/NY/input/15 
+  ```
 
+Testing an area in Singapore:
+ ```sh
+python test.py --name SG15 --dataroot ./datasets/Test/SG/input/15 
+  ```
 
-python train.py --name Frankfurt15 --dataroot ./datasets/Prepped/Frankfurt15 --no_instance --batchSize 2
-python train.py --name Jakarta15 --dataroot ./datasets/Prepped/Jakarta15 --no_instance --batchSize 2
-python train.py --name Lesotho15 --dataroot ./datasets/Prepped/Lesotho15 --no_instance --batchSize 2
+Testing an area in London:
+ ```sh
+python test.py --name London15 --dataroot ./datasets/Test/London/input/15 
+  ```
 
-python train.py --name Beirut --dataroot ./datasets/Prepped/Beirut --no_instance --batchSize 2
+The result will be produced in XYZ directories in `./results/<cityname>/test_latest/images/fake`
 
-python train.py --name Beirut --dataroot ./datasets/Prepped/Beirut --no_instance --batchSize 2
+### 4. Style Transfer
+Transfering the style of one city to another, in this case, a model trained in New York City is used to predict the morphology in Detroit.
+ ```sh
+python test.py --name NY15 --dataroot ./datasets/Transfer/Detroit/input/15
+  ```
 
+Or transfering the urban texture of Jakarta to the street network of Manila
 
+ ```sh
+python test.py --name Jakarta15 --dataroot ./datasets/Transfer/Manila/input/15
+  ```
 
+You can choose to visualise the tiles in QGIS using a local WMTS server.
+For example, use the following url and choose Zoom 15 only.
+```
+file:///D:/InstantCITY//datasets/Test/SG//fake//{z}//{x}//{y}.png
+```
 
+### 4. Metics and Vectorization
 
-python train.py --name NY16 --dataroot ./datasets/Prepped/NY16 --no_instance --batchSize 2 & wait; 
-python train.py --name Rotterdam16 --dataroot ./datasets/Prepped/Rotterdam16 --no_instance --batchSize 2 & wait; 
-python train.py --name Seattle16 --dataroot ./datasets/Prepped/Seattle16 --no_instance --batchSize 2 & wait; 
-python train.py --name SG16 --dataroot ./datasets/Prepped/SG16 --no_instance --batchSize 2 & wait; 
+Please see the jupyter notebook in `datasets/Metric.ipynb` for FID score computation and vectorization.
 
+## License
 
-python train.py --name Frankfurt16 --dataroot ./datasets/Prepped/Frankfurt16 --no_instance --batchSize 2 & wait; 
-python train.py --name Beirut16 --dataroot ./datasets/Prepped/Beirut16 --no_instance --batchSize 2 & wait;
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Commands to generate images with the same stucture as the input
+<!-- ## Citation
 
-#need to test these two once training is done
-python test.py --name Beirut16 --dataroot ./datasets/Test/Beirut/input/16 --no_instance & wait;
-python test.py --name Frankfurt16 --dataroot ./datasets/Test/Frankfurt/input/16 --no_instance & wait; 
+If you like this work and would like to use it in a scientific context, please cite this article.
+```
+@misc{wu2021ganmapper,
+      title={GANmapper: geographical content filling}, 
+      author={Abraham Noah Wu and Filip Biljecki},
+      year={2021},
+      eprint={2108.04232},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+``` -->
 
+## Acknowledgements
 
-python test.py --name Beirut15 --dataroot ./datasets/Test/Beirut/input/15 --no_instance & wait; 
-python test.py --name Frankfurt15 --dataroot ./datasets/Test/Frankfurt/input/15 --no_instance & wait; 
+InstantCity is made possible by using the following packages
 
+* [PyTorch](https://pytorch.org/)
+* [GeoPandas](https://geopandas.org/)
+* [Robosat](https://github.com/mapbox/robosat) - 
+ mask to feature function is borrowed from robosat
+* [GANmapeer](https://github.com/ualsg/GANmapper) - 
+Data processing scripts are borrowed from GANmapper
 
-python test.py --name Jakarta15 --dataroot ./datasets/Test/Jakarta/input/15 --no_instance & wait; 
-python test.py --name Jakarta16 --dataroot ./datasets/Test/Jakarta/input/16 --no_instance & wait; 
-
-python test.py --name London15 --dataroot ./datasets/Test/London/input/15 --no_instance & wait; 
-python test.py --name London16 --dataroot ./datasets/Test/London/input/16 --no_instance & wait; 
-
-python test.py --name NY15 --dataroot ./datasets/Test/NY/input/15 --no_instance & wait; 
-python test.py --name NY116 --dataroot ./datasets/Test/NY/input/16 --no_instance & wait; 
-
-python test.py --name Rotterdam15 --dataroot ./datasets/Test/Rotterdam/input/15 --no_instance & wait; 
-python test.py --name Rotterdam16 --dataroot ./datasets/Test/Rotterdam/input/16 --no_instance & wait; 
-
-python test.py --name Seattle15 --dataroot ./datasets/Test/Seattle/input/15 --no_instance & wait; 
-python test.py --name Seattle16 --dataroot ./datasets/Test/Seattle/input/16 --no_instance & wait; 
-
-python test.py --name SG15 --dataroot ./datasets/Test/SG/input/15 --no_instance & wait; 
-python test.py --name SG16 --dataroot ./datasets/Test/SG/input/16 --no_instance & wait; 
+* [pix2pixHD](https://github.com/NVIDIA/pix2pixHD) - 
+Model Architecture is heavily borrowed from the awesome repo by [tcwang0509](https://github.com/tcwang0509)

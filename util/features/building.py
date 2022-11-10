@@ -93,7 +93,8 @@ class Building_features:
             shape = shapely.geometry.shape(geometry)
 
             if shape.is_valid:
-                self.features.append(geojson.Feature(geometry=geometry))
+                # adding in tile info
+                self.features.append(geojson.Feature(geometry=geometry, properties={"tile": str(tile)}))
             else:
                 continue
 

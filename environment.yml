@@ -1,0 +1,17 @@
+name: IC
+channels:
+- pytorch
+- defaults
+dependencies:
+- python
+- pytorch
+- torchvision
+- cudatoolkit=10.2
+- scipy
+- pip
+- pip:
+  - dominate==2.4.0
+  - Pillow==6.1.0
+  - numpy==1.16.4
+  - visdom==0.1.8
+  

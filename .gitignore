@@ -1,6 +1,7 @@
-debug*
 checkpoints/
 results/
-build/
-dist/
 datasets/
+*.qgz
+*.gpkg
+*.pyc
+README copy.md

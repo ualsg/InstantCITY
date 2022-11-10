@@ -22,7 +22,7 @@ def convert_binary(img_path):
     _, img = cv2.threshold(img, 45, 255, cv2.THRESH_BINARY)
     return img
 
-def mask_to_feature(mask_dir, kernel_size_denoise, kernel_size_grow, simplify_threshold):
+def mask_to_feature(mask_dir, kernel_size_denoise, kernel_size_grow, simplify_threshold, zoom):
 
     # denoise is removing noises surrounding the images. ie cv2.MORPH_OPEN
     # grow is closing the gaps surrounding the images. ie cv2.MORPH_CLOSE
@@ -30,7 +30,7 @@ def mask_to_feature(mask_dir, kernel_size_denoise, kernel_size_grow, simplify_th
     # requires 3 settings of grow to get most polygons ready, 1, 3, 5
     handler = Building_features(kernel_size_denoise, kernel_size_grow , simplify_threshold)
     
-    tiles = list(tiles_from_slippy_map(mask_dir))
+    tiles = list(tiles_from_slippy_map(mask_dir, zoom))
 
     for tile, path in tqdm(tiles, ascii=True, unit="mask"):
         binary_img = convert_binary(path)

@@ -9,9 +9,10 @@
   </a>
 </p>
 
-This is the official repo of InstantCITY, a Geospatial Data Translation model for urban form analysis, transfer, and quality control
+This is the official repo of InstantCITY, a Geospatial Data Translation model for urban form analysis, transfer, and quality control.
 
 ## Running InstantCITY 
+
 ### 1. Install prerequisites
 
 Use `environment.yml` to create a conda environment for GANmapper
@@ -69,9 +70,29 @@ For example, use the following url and choose Zoom 15 only.
 file:///D:/InstantCITY//datasets/Test/SG//fake//{z}//{x}//{y}.png
 ```
 
-### 4. Metics and Vectorization
+### 4. Metrics and Vectorization
 
 Please see the jupyter notebook in `datasets/Metric.ipynb` for FID score computation and vectorization.
+
+## Paper
+
+A [paper](https://doi.org/10.1016/j.isprsjprs.2022.11.005) about the work was published in _ISPRS Journal of Photogrammetry and Remote Sensing_, and it is available open access.
+
+If you use this work in a scientific context, please cite this article.
+
+Wu AN, Biljecki F (2023): InstantCITY: Synthesising morphologically accurate geospatial data for urban form analysis, transfer, and quality control. ISPRS Journal of Photogrammetry and Remote Sensing, 195: 90-104. doi:10.1016/j.isprsjprs.2022.11.005
+
+```
+@article{2023_ijprs_instantcity,
+  author = {Wu, Abraham Noah and Biljecki, Filip},
+  doi = {10.1016/j.isprsjprs.2022.11.005},
+  journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+  pages = {90-104},
+  title = {InstantCITY: Synthesising morphologically accurate geospatial data for urban form analysis, transfer, and quality control},
+  volume = {195},
+  year = {2023}
+}
+```
 
 ## License
 

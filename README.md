@@ -76,7 +76,7 @@ Please see the jupyter notebook in `datasets/Metric.ipynb` for FID score computa
 
 ## Paper
 
-A [paper](https://doi.org/10.1016/j.isprsjprs.2022.11.005) about the work was published in _ISPRS Journal of Photogrammetry and Remote Sensing_, and it is available open access.
+A [paper](https://doi.org/10.1016/j.isprsjprs.2022.11.005) about the work was published in _ISPRS Journal of Photogrammetry and Remote Sensing_, and it is available open access [here](https://ual.sg/publication/2023-ijprs-instantcity/2023-ijprs-instantcity.pdf).
 
 If you use this work in a scientific context, please cite this article.
 
